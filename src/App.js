@@ -1,18 +1,10 @@
-import {useState} from "react";
+import React, {useState} from "react";
+import User from './pages/User';
 
 function App() {
-
-  const[counter, setCounter] = useState(0);
-  function increment(){
-    setCounter(counter + 1);
-    console.log(counter)
-  }
-  return (
+  return(
     <div className="App">
-      <div>
-        contador:{counter}
-      </div>
-      <button onClick={increment}>Incremento</button>
+      <User/>
     </div>
   );
 }
