@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import User from './pages/User';
-import Profile from './pages/Profie';
+import Profile from './pages/Profile';
 
 export default function Router(){
     return(

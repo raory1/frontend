@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import api from '../../services/api'
+import {Link} from "react-router-dom"
 import './style.css';
 
 export default function User(){
@@ -15,6 +16,7 @@ export default function User(){
     return (
         <div id="user-container">
             <h1>Lista de usuarios</h1>
+            <Link className="button" id="create-link" to={"/create"}>Criar</Link>
             <ul className="user-list">
                 {users.map(user =>(
                     <li key={user.id}>
@@ -29,12 +31,14 @@ export default function User(){
                 
                         <strong>Empresa</strong>
                         <p>{user.empresa}</p>
+
+                        <div className="actions">
+                            <button className="button" type="button">Deletar</button>
+                            <button className="button" type="button">Acessar</button>
+                        </div>
                     </li>
-
                 ))}
-
             </ul>
-    
         </div>
       );
 }
