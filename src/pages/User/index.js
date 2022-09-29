@@ -11,7 +11,15 @@ export default function User(){
         })
     },[])
 
-    console.log(users)
+    async function handleDelete(id){
+        try{
+            await api.delete(`/users/${id}`)
+            setUsers(users.filter(user=>user.id != id))
+            alert('Excluido com sucesso.')
+        }catch(err){
+            alert('Erro ao tentar excluir.')
+        }
+    }
 
     return (
         <div id="user-container">
@@ -33,8 +41,8 @@ export default function User(){
                         <p>{user.empresa}</p>
 
                         <div className="actions">
-                            <button className="button" type="button">Deletar</button>
-                            <button className="button" type="button">Acessar</button>
+                            <button className="button" onClick={()=>handleDelete(user.id)}type="button">Deletar</button>
+                            <Link className="button" to={`/update/${user.id}`}>Acessar</Link>
                         </div>
                     </li>
                 ))}

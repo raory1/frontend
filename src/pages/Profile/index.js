@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
 import './style.css'
 import api from '../../services/api'
 
 export default function Profile(){
+    const{id} = useParams();
     const navigate = useNavigate();
     const initUser={
         name: '',
@@ -14,9 +15,21 @@ export default function Profile(){
 
     const [user, setUser] = useState(initUser);
 
+    useEffect(()=>{
+        if(id){
+            api.get(`/users/${id}`).then(response=>{
+                setUser(...response.data)
+            })
+        }
+    }, []);
+
     function onSubmit(ev){
         ev.preventDefault();
-        api.post('/users', user).then((response)=>{
+        const method = id ? 'put' : 'post';
+        const url = id
+        ? `users/${id}`
+        :'/users'
+        api[method](url, user).then((response)=>{
             navigate('/')
         })
     }
